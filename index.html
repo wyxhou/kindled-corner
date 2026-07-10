@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kindled Corner — Curated Finds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2E1F3D;
+    --ink-soft: #4A3A5C;
+    --parchment: #F1E9D8;
+    --parchment-dim: #E7DCC5;
+    --gold: #C9A24B;
+    --sage: #6B8768;
+    --brick: #A85D3B;
+    --white: #FBF8F2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; }
+
+  /* Disclosure banner */
+  .disclosure {
+    background: var(--ink);
+    color: var(--parchment-dim);
+    text-align: center;
+    font-size: 0.78rem;
+    padding: 9px 20px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Thread motif — runs top to bottom behind sections */
+  .thread {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--gold) 0px, var(--gold) 6px,
+      transparent 6px, transparent 14px
+    );
+    transform: translateX(-50%);
+    z-index: 0;
+    opacity: 0.35;
+  }
+
+  header {
+    position: relative;
+    padding: 90px 24px 70px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brick);
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    letter-spacing: -0.01em;
+    max-width: 720px;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--brick);
+  }
+
+  .sub {
+    max-width: 480px;
+    margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  /* Category nav */
+  nav.categories {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cat-btn {
+    background: var(--white);
+    border: 1.5px solid var(--ink);
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .cat-btn:hover { transform: translateY(-2px); }
+
+  .cat-btn.active {
+    background: var(--ink);
+    color: var(--parchment);
+  }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 24px 100px;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--sage);
+    text-align: center;
+    margin: 60px 0 36px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 26px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(46, 31, 61, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(46, 31, 61, 0.14);
+  }
+
+  .card-img {
+    aspect-ratio: 4/3;
+    background: var(--parchment-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 0.8rem;
+    font-style: italic;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .card-body {
+    padding: 20px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+
+  .card-blurb {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+
+  .shop-btn {
+    margin-top: 6px;
+    display: inline-block;
+    text-align: center;
+    background: var(--brick);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    border-radius: 3px;
+    transition: background 0.2s ease;
+  }
+
+  .shop-btn:hover { background: #8f4c2e; }
+
+  footer {
+    text-align: center;
+    padding: 50px 24px 60px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--parchment-dim);
+  }
+
+  footer .brand {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 520px) {
+    header { padding: 60px 20px 50px; }
+    .section-label { margin: 44px 0 26px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="disclosure">
+    This page contains affiliate links — I may earn a small commission on purchases made through them, at no extra cost to you. #ad
+  </div>
+
+  <header>
+    <div class="thread"></div>
+    <div class="eyebrow">Kindled Corner</div>
+    <h1>Small things that make <em>a room feel like yours</em></h1>
+    <p class="sub">Odd little lamps, warm textures, and quiet rituals — the finds that turn a corner of a room into somewhere you actually want to sit.</p>
+
+    <nav class="categories">
+      <button class="cat-btn active" data-cat="all">All</button>
+      <button class="cat-btn" data-cat="lighting">Whimsical Lighting</button>
+      <button class="cat-btn" data-cat="textures">Cozy Textures</button>
+      <button class="cat-btn" data-cat="rituals">Quiet Rituals</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="section-label" data-section="lighting">Whimsical Lighting</div>
+    <div class="grid" data-group="lighting">
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Toast lamp</div>
+          <div class="card-blurb">Exactly what it sounds like — a slice of toast that glows. Ridiculous, and somehow perfect on a nightstand.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Mushroom table lamp</div>
+          <div class="card-blurb">'70s-retro shape, soft amber glow — the piece every "cozy corner" photo seems to have right now.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Moon phase night light</div>
+          <div class="card-blurb">Dims low enough for a bedside, detailed enough to actually look at.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Flameless candle set</div>
+          <div class="card-blurb">Real wax, real flicker, none of the fire hazard — good for renters and forgetful people alike.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" data-section="textures">Cozy Textures</div>
+    <div class="grid" data-group="textures">
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Chunky knit throw blanket</div>
+          <div class="card-blurb">The kind that makes a couch look finished even when the rest of the room isn't.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Weighted lap blanket</div>
+          <div class="card-blurb">Smaller than a full weighted blanket — made for reading, not sleeping under.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Handwoven floor cushion</div>
+          <div class="card-blurb">Extra seating that doesn't look like extra seating — natural fiber, holds its shape.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" data-section="rituals">Quiet Rituals</div>
+    <div class="grid" data-group="rituals">
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Loose-leaf tea sampler</div>
+          <div class="card-blurb">Small-batch blends worth the extra five minutes of steeping.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Tarot deck &amp; reading journal</div>
+          <div class="card-blurb">Clear, well-illustrated deck paired with a plain journal for logging spreads.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">product photo</div>
+        <div class="card-body">
+          <div class="card-title">Palo santo &amp; holder set</div>
+          <div class="card-blurb">The last five minutes before winding down for the night.</div>
+          <a class="shop-btn" href="#" target="_blank" rel="nofollow sponsored">Shop this →</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="brand">Kindled Corner</div>
+    <div>Made by hand, shared honestly. This page contains affiliate links (#ad).</div>
+  </footer>
+
+<script>
+  const buttons = document.querySelectorAll('.cat-btn');
+  const groups = document.querySelectorAll('[data-group]');
+  const labels = document.querySelectorAll('[data-section]');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+
+      groups.forEach(g => {
+        g.style.display = (cat === 'all' || g.dataset.group === cat) ? 'grid' : 'none';
+      });
+      labels.forEach(l => {
+        l.style.display = (cat === 'all' || l.dataset.section === cat) ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
